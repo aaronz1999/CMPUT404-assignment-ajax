@@ -142,12 +142,11 @@ function getPosition(e) {
 
 function addEntity(entity, data) {
     world[entity] = data;
-    var callback = function() {
+    var update = function() {
         drawNextFrame(); 
-        // (but should we?)
     }
     //XXX: Send a XHTML Request that updates the entity you just  modified!
-    sendJSONXMLHTTPRequest("/entity/" + entity, data, callback);
+    sendJSONXMLHTTPRequest("/entity/" + entity, data, update);
 }
 
 var counter = 0;
