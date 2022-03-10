@@ -12,4 +12,8 @@ Contributors / Licensing
 
 Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
 
+Aaron Zhang
 
+References:
+
+https://www.programcreek.com/python/example/58915/flask.jsonify
