@@ -17,3 +17,5 @@ Aaron Zhang
 References:
 
 https://www.programcreek.com/python/example/58915/flask.jsonify
+
+https://htmlcolorcodes.com/color-names/
