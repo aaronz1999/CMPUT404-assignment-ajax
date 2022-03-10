@@ -39,9 +39,9 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
             try {
                 if (xhr.status==200) {
                     //XXX: parse some JSON from the request!
-                    response = JSON.parse(xhr.responseText)
+                    var parse = JSON.parse(xhr.responseText)
                     //XXX: Pass the data to the callback!
-                    callback(response);
+                    callback(parse);
                 }
             } 
             catch(e) {
@@ -50,7 +50,7 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
         }
     };
     //XXX: POST to a URL
-    xhr.open("POST", url);
+    xhr.open("POST", url, true);
     //XXX: set the mimetype and the accept headers!
     // Remember to use application/json !
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -81,7 +81,7 @@ function prepEntity(entity) {
         entity["colour"] = "#FF0000";
     }
     if (!entity["radius"]) {
-        entity["radius"] = 20;
+        entity["radius"] = 30;
     }
     return entity;
 }
@@ -142,9 +142,12 @@ function getPosition(e) {
 
 function addEntity(entity, data) {
     world[entity] = data;
-    //drawNextFrame(); // (but should we?)
+    var callback = function() {
+        drawNextFrame(); 
+        // (but should we?)
+    }
     //XXX: Send a XHTML Request that updates the entity you just  modified!
-    sendJSONXMLHTTPRequest("/entity/" + entity, data);
+    sendJSONXMLHTTPRequest("/entity/" + entity, data, callback);
 }
 
 var counter = 0;
@@ -253,15 +256,15 @@ mouse = (function() {
 // Add the application specific mouse listeners!
 //XXX: TODO Make these prettier!
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'9999ff'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#ffff00'});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'ff9999'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#00ffff'});
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'99ff99',
+    addEntityWithoutName({'x':x,'y':y,'colour':'#fffafa',
                           'radius':5});
 });
 
